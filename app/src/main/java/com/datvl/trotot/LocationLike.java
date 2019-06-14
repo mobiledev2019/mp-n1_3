@@ -5,6 +5,7 @@ import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import com.datvl.trotot.api.GetApi;
@@ -22,12 +23,16 @@ public class LocationLike extends AppCompatActivity {
 
     Spinner spn_area_like;
     Common cm;
+    ImageView img_list_area, img_add_area;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_like);
 
         spn_area_like = findViewById(R.id.spinner_address_like);
+        img_list_area = findViewById(R.id.img_list_area_saved);
+        img_add_area = findViewById(R.id.img_save_area);
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, null)
                 .setSmallIcon(R.drawable.heart)
@@ -40,6 +45,10 @@ public class LocationLike extends AppCompatActivity {
 
         final List<Area> listArea = new ArrayList<>();
 
+
+        /**
+         * Lấy danh sách Đia chỉ
+         */
         GetApi getApi = new GetApi(cm.getListArea(), getApplication(), new OnEventListener() {
             @Override
             public void onSuccess(JSONArray object) {
@@ -64,6 +73,9 @@ public class LocationLike extends AppCompatActivity {
 
             }
         });
-
+        /**
+         * end
+         */
+        
     }
 }
