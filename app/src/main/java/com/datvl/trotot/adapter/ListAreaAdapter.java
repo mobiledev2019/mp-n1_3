@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.datvl.trotot.R;
+import com.datvl.trotot.model.Area;
 import com.datvl.trotot.model.Message;
 
 import java.util.ArrayList;
@@ -18,12 +19,12 @@ import java.util.List;
 
 public class ListAreaAdapter extends RecyclerView.Adapter<ListAreaAdapter.RecyclerViewHolder>{
 
-    private List<Message> data = new ArrayList<>();
+    private List<Area> data = new ArrayList<>();
     SharedPreferences sharedPreferences;
     String username;
 
 
-    public ListAreaAdapter(List<Message> data) {
+    public ListAreaAdapter(List<Area> data) {
         this.data = data;
     }
 
@@ -43,17 +44,15 @@ public class ListAreaAdapter extends RecyclerView.Adapter<ListAreaAdapter.Recycl
     public void onBindViewHolder(final RecyclerViewHolder holder, final int position) {
 
 
-        holder.txtContent.setText(data.get(position).getContent());
-        if (username.equals(data.get(position).getUser())) {
-            holder.txtContent.setGravity(Gravity.RIGHT | Gravity.CENTER);
-            holder.txtMyUser.setVisibility(View.VISIBLE);
-            holder.txtMyUser.setText(username);
-        }
-        else {
-            holder.txtContent.setGravity(Gravity.LEFT | Gravity.CENTER);
-            holder.txtUser2.setVisibility(View.VISIBLE);
-            holder.txtUser2.setText(data.get(position).getUser());
-        }
+        holder.txtContent.setText(data.get(position).getName());
+        holder.txtContent.setGravity(Gravity.LEFT);
+        holder.txtUser2.setText("" + (position + 1));
+        holder.txtUser2.setVisibility(View.VISIBLE);
+
+//        holder.txtMyUser.setText("X");
+//        holder.txtMyUser.setTextSize(16);
+//        holder.txtMyUser.setTextColor(R.color.colorRed);
+//        holder.txtMyUser.setVisibility(View.VISIBLE);
     }
 
     @Override

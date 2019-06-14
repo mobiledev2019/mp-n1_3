@@ -98,6 +98,11 @@ public class Common {
         return url;
     }
 
+    public static String getListAreaByUser() {
+        String url = "http://" + ip + "/trotot/public/list-area-user/";
+        return url;
+    }
+
 
 
 
