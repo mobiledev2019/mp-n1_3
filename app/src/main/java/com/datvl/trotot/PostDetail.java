@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +20,7 @@ import android.widget.TextView;
 import com.datvl.trotot.api.GetApi;
 import com.datvl.trotot.common.Common;
 import com.datvl.trotot.library.NumberFormat;
-import com.datvl.trotot.post.Post;
+import com.datvl.trotot.model.Post;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;

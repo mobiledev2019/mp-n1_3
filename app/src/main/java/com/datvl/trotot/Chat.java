@@ -16,7 +16,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,12 +24,11 @@ import com.datvl.trotot.api.GetApi;
 import com.datvl.trotot.common.Common;
 import com.datvl.trotot.library.NumberFormat;
 import com.datvl.trotot.model.Message;
-import com.datvl.trotot.post.Post;
+import com.datvl.trotot.model.Post;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 

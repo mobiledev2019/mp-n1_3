@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.datvl.trotot.PostDetail;
 import com.datvl.trotot.R;
 import com.datvl.trotot.library.NumberFormat;
-import com.datvl.trotot.post.Post;
+import com.datvl.trotot.model.Post;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;

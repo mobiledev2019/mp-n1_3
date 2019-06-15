@@ -2,20 +2,17 @@ package com.datvl.trotot;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
 import com.datvl.trotot.adapter.ListPostAdapter;
 import com.datvl.trotot.api.GetApi;
 import com.datvl.trotot.common.Common;
-import com.datvl.trotot.post.Post;
+import com.datvl.trotot.model.Post;
 
 import org.json.JSONArray;
 import org.json.JSONException;

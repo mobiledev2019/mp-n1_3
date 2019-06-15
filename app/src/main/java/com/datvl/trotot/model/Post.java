@@ -1,4 +1,4 @@
-package com.datvl.trotot.post;
+package com.datvl.trotot.model;
 
 import java.io.Serializable;
 import java.util.Date;

@@ -1,7 +1,5 @@
 package com.datvl.trotot.fragment;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -27,7 +25,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.datvl.trotot.NewPost;
 import com.datvl.trotot.OnEventListener;
@@ -36,13 +33,12 @@ import com.datvl.trotot.adapter.ListPostAdapter;
 import com.datvl.trotot.api.GetApi;
 import com.datvl.trotot.common.Common;
 import com.datvl.trotot.model.Area;
-import com.datvl.trotot.post.Post;
+import com.datvl.trotot.model.Post;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -147,7 +143,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                                                 Integer.parseInt(jsonObject.getString("price")) ,
                                                 jsonObject.getString("image"),
                                                 jsonObject.getString("content"),
-                                                jsonObject.getString("address"),
+                                                jsonObject.getString("area_name"),
                                                 jsonObject.getString("created_at_string"),
                                                 Integer.parseInt(jsonObject.getString("scale"))
                                         ));
@@ -184,12 +180,6 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
     }
 
     public void filter(final View view) {
-//        String arr_view_type[]={
-//                "Grid View",
-//                "List View"};
-//        String arr_price_type[]={
-//                "Price ⇧",
-//                "Price ⇩"};
         final SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("fillter", Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
         final Spinner spin=(Spinner) view.findViewById(R.id.spinner_view);
@@ -211,16 +201,6 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                         listArea.add(new Area(Integer.parseInt(jsonObject.getString("id")),
                                 jsonObject.getString("name")
                         ));
-//                        listPost.add(new Post(
-//                                Integer.parseInt(jsonObject.getString("id")),
-//                                jsonObject.getString("name"),
-//                                Integer.parseInt(jsonObject.getString("price")) ,
-//                                jsonObject.getString("image"),
-//                                jsonObject.getString("content"),
-//                                jsonObject.getString("address"),
-//                                jsonObject.getString("created_at_string"),
-//                                Integer.parseInt(jsonObject.getString("scale"))
-//                        ));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -244,8 +224,6 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
 
         setAdapterSpinner("price",price_type, spin_price, arr_price_type, editor);
         setAdapterSpinner("view",view_type, spin, arr_view_type, editor);
-//        setAdapterSpinner("price",price_type, spin_price, arr_price_type, editor);
-//        setAdapterSpinner("price",price_type, spin_price, listArea, editor);
     }
 
     public void reloadFragment(){

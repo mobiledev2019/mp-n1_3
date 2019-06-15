@@ -2,24 +2,16 @@ package com.datvl.trotot.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.datvl.trotot.PostDetail;
 import com.datvl.trotot.R;
-import com.datvl.trotot.library.NumberFormat;
 import com.datvl.trotot.model.Message;
-import com.datvl.trotot.post.Post;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;

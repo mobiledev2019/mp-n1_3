@@ -1,4 +1,4 @@
-package com.datvl.trotot.user;
+package com.datvl.trotot.model;
 
 import java.io.Serializable;
 

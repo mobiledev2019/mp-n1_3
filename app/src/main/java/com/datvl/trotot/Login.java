@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -15,18 +14,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.datvl.trotot.adapter.ListPostAdapter;
 import com.datvl.trotot.api.GetApi;
 import com.datvl.trotot.common.Common;
-import com.datvl.trotot.library.NumberFormat;
-import com.datvl.trotot.post.Post;
-import com.squareup.picasso.Picasso;
+import com.datvl.trotot.model.Post;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
