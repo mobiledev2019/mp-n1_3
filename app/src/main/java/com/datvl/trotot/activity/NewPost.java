@@ -1,4 +1,4 @@
-package com.datvl.trotot;
+package com.datvl.trotot.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

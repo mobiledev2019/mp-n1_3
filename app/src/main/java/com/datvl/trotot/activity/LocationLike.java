@@ -1,4 +1,4 @@
-package com.datvl.trotot;
+package com.datvl.trotot.activity;
 
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
@@ -12,12 +12,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.datvl.trotot.R;
 import com.datvl.trotot.adapter.ListAreaAdapter;
-import com.datvl.trotot.adapter.ListKeySearchAdapter;
 import com.datvl.trotot.api.GetApi;
 import com.datvl.trotot.common.Common;
 import com.datvl.trotot.model.Area;
-import com.datvl.trotot.model.KeySearch;
 
 import org.json.JSONArray;
 import org.json.JSONException;

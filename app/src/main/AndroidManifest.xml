@@ -24,16 +24,16 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
 
-        <activity android:name=".LocationLike"/>
+        <activity android:name=".activity.LocationLike"/>
 
-        <activity android:name=".NewPost" />
+        <activity android:name=".activity.NewPost" />
 
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/scale_list" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
@@ -43,34 +43,34 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PostDetail"
+            android:name=".activity.PostDetail"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".activity.MainActivity" />
         </activity>
         <activity
-            android:name=".PostSaved"
+            android:name=".activity.PostSaved"
             android:label="Bài tin đã lưu"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".activity.MainActivity" />
         </activity>
         <activity
-            android:name=".Login"
+            android:name=".activity.Login"
             android:label="Login">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".activity.MainActivity" />
         </activity>
         <activity
-            android:name=".Chat"
+            android:name=".activity.Chat"
             android:label="Chat"
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".activity.MainActivity" />
         </activity>
     </application>
 

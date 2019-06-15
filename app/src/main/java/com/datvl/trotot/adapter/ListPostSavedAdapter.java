@@ -10,7 +10,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.datvl.trotot.PostDetail;
+import com.datvl.trotot.activity.PostDetail;
 import com.datvl.trotot.R;
 import com.datvl.trotot.library.NumberFormat;
 import com.datvl.trotot.model.Post;

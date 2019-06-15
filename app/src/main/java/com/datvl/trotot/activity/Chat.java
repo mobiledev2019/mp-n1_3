@@ -1,4 +1,4 @@
-package com.datvl.trotot;
+package com.datvl.trotot.activity;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.datvl.trotot.R;
 import com.datvl.trotot.adapter.ListMessageAdapter;
 import com.datvl.trotot.api.GetApi;
 import com.datvl.trotot.common.Common;

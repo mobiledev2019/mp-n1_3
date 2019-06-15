@@ -15,10 +15,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.datvl.trotot.LocationLike;
-import com.datvl.trotot.Login;
-import com.datvl.trotot.PostDetail;
-import com.datvl.trotot.PostSaved;
+import com.datvl.trotot.activity.LocationLike;
+import com.datvl.trotot.activity.Login;
+import com.datvl.trotot.activity.PostSaved;
 import com.datvl.trotot.R;
 
 public class FragmentSetting extends Fragment {
