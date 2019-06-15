@@ -80,8 +80,8 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.Recycl
 
         holder.txtUserName.setText(name_sub);
         holder.txtPrice.setText("" + NumberFormat.getFormatedNum((int) price) + " đ");
-        holder.txtAddress.setText(address);
-        holder.txtTime.setText(timeAgo + " | ");
+        holder.txtAddress.setText(" ◉ " + address);
+        holder.txtTime.setText("✎ " + timeAgo);
 
         Picasso.get()
                 .load(data.get(position).getImage())
