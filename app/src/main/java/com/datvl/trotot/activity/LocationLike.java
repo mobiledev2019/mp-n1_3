@@ -1,5 +1,9 @@
 package com.datvl.trotot.activity;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import com.datvl.trotot.OnEventListener;
 import com.datvl.trotot.R;
 import com.datvl.trotot.adapter.ListAreaAdapter;
 import com.datvl.trotot.api.GetApi;
@@ -30,7 +35,7 @@ import static com.android.volley.VolleyLog.TAG;
 public class LocationLike extends AppCompatActivity {
 
     Spinner spn_area_like;
-    Common cm;
+    Common cm = new Common();
     ImageView img_list_area, img_add_area;
     RecyclerView recyclerView;
 
@@ -44,14 +49,7 @@ public class LocationLike extends AppCompatActivity {
         img_add_area = findViewById(R.id.img_save_area);
         recyclerView = findViewById(R.id.recycler_area_like);
 
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, null)
-                .setSmallIcon(R.drawable.heart)
-                .setContentTitle("test")
-                .setContentText("test content")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        int notificationId = 12;
-        notificationManager.notify(notificationId, mBuilder.build());
+        cm.setNoification( this, 123, "datvl");
 
         final List<Area> listArea = new ArrayList<>();
 
@@ -148,5 +146,30 @@ public class LocationLike extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void setNoification( Context context, int notificationId, String ChannelId) {
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplication(), "Your_channel_id")
+                .setSmallIcon(R.drawable.heart)
+                .setContentTitle("test")
+                .setContentText("test content")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplication());
+
+        String channelId = "Your_channel_id";
+//        NotificationChannel channel = null;
+//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+//            NotificationManager mNotificationManager =
+//                    (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+//            channel = new NotificationChannel(
+//                    channelId,
+//                    "Channel human readable title",
+//                    NotificationManager.IMPORTANCE_DEFAULT);
+//            mNotificationManager.createNotificationChannel(channel);
+//            mBuilder.setChannelId(channelId);
+//            mBuilder.setSmallIcon(R.drawable.heart);
+//        }
+
+        notificationManager.notify(notificationId, mBuilder.build());
     }
 }

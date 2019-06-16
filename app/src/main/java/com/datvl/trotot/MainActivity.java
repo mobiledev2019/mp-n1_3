@@ -1,4 +1,4 @@
-package com.datvl.trotot.activity;
+package com.datvl.trotot;
 
 import android.annotation.SuppressLint;
 import android.app.FragmentManager;
@@ -26,7 +26,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.datvl.trotot.R;
 import com.datvl.trotot.common.Common;
 import com.datvl.trotot.fragment.FragmentHome;
 import com.datvl.trotot.fragment.FragmentMessage;

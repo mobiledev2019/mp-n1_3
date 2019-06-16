@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.datvl.trotot.OnEventListener;
 import com.datvl.trotot.R;
 import com.datvl.trotot.adapter.ListPostAdapter;
 import com.datvl.trotot.api.GetApi;

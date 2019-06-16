@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.datvl.trotot.activity.OnEventListener;
+import com.datvl.trotot.OnEventListener;
 import com.datvl.trotot.activity.PostDetail;
 import com.datvl.trotot.R;
 import com.datvl.trotot.api.GetApi;

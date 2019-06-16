@@ -33,7 +33,7 @@
             android:resource="@xml/scale_list" />
 
         <activity
-            android:name=".activity.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name"
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
@@ -47,7 +47,7 @@
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.MainActivity" />
+                android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".activity.PostSaved"
@@ -55,14 +55,14 @@
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.MainActivity" />
+                android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".activity.Login"
             android:label="Login">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.MainActivity" />
+                android:value=".MainActivity" />
         </activity>
         <activity
             android:name=".activity.Chat"
@@ -70,7 +70,7 @@
             android:theme="@style/AppTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.MainActivity" />
+                android:value=".MainActivity" />
         </activity>
     </application>
 

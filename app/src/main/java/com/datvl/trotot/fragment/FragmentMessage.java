@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.datvl.trotot.activity.OnEventListener;
+import com.datvl.trotot.OnEventListener;
 import com.datvl.trotot.R;
 import com.datvl.trotot.adapter.ListMessageUserAdapter;
 import com.datvl.trotot.api.GetApi;

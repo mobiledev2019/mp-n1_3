@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.datvl.trotot.activity.Chat;
-import com.datvl.trotot.activity.OnEventListener;
+import com.datvl.trotot.OnEventListener;
 import com.datvl.trotot.R;
 import com.datvl.trotot.api.GetApi;
 import com.datvl.trotot.common.Common;

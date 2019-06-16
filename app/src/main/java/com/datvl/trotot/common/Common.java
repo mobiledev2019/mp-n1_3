@@ -1,7 +1,11 @@
 package com.datvl.trotot.common;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -13,6 +17,9 @@ public class Common {
 //    static String ip = "192.168.1.12";
 //    static String ip = "192.168.43.230";
     static String ip = "192.168.1.12";
+
+    public Common() {
+    }
 
     public static String getUrlLogin() {
         String url = "http://" + ip + "/trotot/public/login/";
@@ -122,5 +129,31 @@ public class Common {
             user_id = sharedPreferences.getString("username", "0");
         }
         return user_id;
+    }
+
+    public void setNoification( Context context, int notificationId, String ChannelId) {
+
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, "Your_channel_id")
+                .setSmallIcon(R.drawable.heart)
+                .setContentTitle("test")
+                .setContentText("test content")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+
+        String channelId = "Your_channel_id";
+//        NotificationChannel channel = null;
+//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+//            NotificationManager mNotificationManager =
+//                    (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
+//            channel = new NotificationChannel(
+//                    channelId,
+//                    "Channel human readable title",
+//                    NotificationManager.IMPORTANCE_DEFAULT);
+//            mNotificationManager.createNotificationChannel(channel);
+//            mBuilder.setChannelId(channelId);
+//            mBuilder.setSmallIcon(R.drawable.heart);
+//        }
+
+        notificationManager.notify(notificationId, mBuilder.build());
     }
 }

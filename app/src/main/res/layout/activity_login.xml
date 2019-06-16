@@ -95,21 +95,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:gravity="center"
+            >
 
             <Button
                 android:layout_marginTop="10dp"
                 android:layout_height="30dp"
-                android:layout_weight="1"
-                android:background="@color/colorBlueFace"
-                android:textColor="@color/colorWhite"
-                android:textSize="14sp"
-                android:text="Facebook"
-                android:layout_width="wrap_content" />
-            <Button
-                android:layout_marginTop="10dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
                 android:background="@color/colorGreen"
                 android:textColor="@color/colorWhite"
                 android:textSize="14sp"

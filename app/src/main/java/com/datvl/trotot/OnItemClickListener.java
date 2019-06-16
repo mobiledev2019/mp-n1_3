@@ -1,4 +1,4 @@
-package com.datvl.trotot.activity;
+package com.datvl.trotot;
 
 import com.datvl.trotot.model.KeySearch;
 

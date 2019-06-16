@@ -17,7 +17,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.datvl.trotot.OnEventListener;
 import com.datvl.trotot.R;
+import com.datvl.trotot.activity.Chat;
 import com.datvl.trotot.api.GetApi;
 import com.datvl.trotot.common.Common;
 import com.datvl.trotot.library.NumberFormat;

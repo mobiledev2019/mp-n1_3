@@ -27,7 +27,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.datvl.trotot.activity.NewPost;
-import com.datvl.trotot.activity.OnEventListener;
+import com.datvl.trotot.OnEventListener;
 import com.datvl.trotot.R;
 import com.datvl.trotot.adapter.ListPostAdapter;
 import com.datvl.trotot.api.GetApi;

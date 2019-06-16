@@ -3,6 +3,8 @@ package com.datvl.trotot.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.datvl.trotot.R;
+
 public class NewPost extends AppCompatActivity {
 
     @Override

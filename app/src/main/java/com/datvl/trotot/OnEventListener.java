@@ -1,4 +1,4 @@
-package com.datvl.trotot.activity;
+package com.datvl.trotot;
 
 import org.json.JSONArray;
 
