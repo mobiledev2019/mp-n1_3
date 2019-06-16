@@ -50,7 +50,7 @@ public class PostDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_detail);
-
+        setTitle("");
         pb = (ProgressBar)findViewById(R.id.progressBarDetail);
         postDetail = (ConstraintLayout)findViewById(R.id.post_detail);
         animation = AnimationUtils.loadAnimation(getApplication(), R.anim.scale_list);

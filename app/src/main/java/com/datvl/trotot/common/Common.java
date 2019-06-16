@@ -110,6 +110,21 @@ public class Common {
         return url;
     }
 
+    public static String getListAreaWithUser() {
+        String url = "http://" + ip + "/trotot/public/list-area-saved/";
+        return url;
+    }
+
+    public static String saveAreaByUser() {
+        String url = "http://" + ip + "/trotot/public/save-area-liked/";
+        return url;
+    }
+
+    public static String deleteAreaByUser() {
+        String url = "http://" + ip + "/trotot/public/delete-area-liked/";
+        return url;
+    }
+
 
 
 

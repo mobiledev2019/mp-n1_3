@@ -44,9 +44,6 @@ public class LocationLike extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_location_like);
 
-        spn_area_like = findViewById(R.id.spinner_address_like);
-        img_list_area = findViewById(R.id.img_list_area_saved);
-        img_add_area = findViewById(R.id.img_save_area);
         recyclerView = findViewById(R.id.recycler_area_like);
 
         cm.setNoification( this, 123, "datvl");
@@ -55,68 +52,7 @@ public class LocationLike extends AppCompatActivity {
 
         String user_id = cm.getUserID(getApplication());
 
-        loadListArea(cm.getListAreaByUser() + user_id);
-
-        /**
-         * Lấy danh sách Đia chỉ
-         */
-        GetApi getArea = new GetApi(cm.getListArea(), getApplication(), new OnEventListener() {
-            @Override
-            public void onSuccess(JSONArray object) {
-                for (int i=0 ; i< object.length() ; i++){
-                    try {
-                        JSONObject jsonObject = object.getJSONObject(i);
-
-                        listArea.add(new Area(Integer.parseInt(jsonObject.getString("id")),
-                                jsonObject.getString("name")
-                        ));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-                ArrayAdapter<Area> adapter = new ArrayAdapter<Area>(getApplication(), android.R.layout.simple_gallery_item, listArea);
-                adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-                spn_area_like.setAdapter(adapter);
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-
-            }
-        });
-        /**
-         * end
-         */
-
-        img_list_area.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                GetApi getArea = new GetApi(cm.getListArea(), getApplication(), new OnEventListener() {
-                    @Override
-                    public void onSuccess(JSONArray object) {
-                        for (int i=0 ; i< object.length() ; i++){
-                            try {
-                                JSONObject jsonObject = object.getJSONObject(i);
-
-                                listArea.add(new Area(Integer.parseInt(jsonObject.getString("id")),
-                                        jsonObject.getString("name")
-                                ));
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        ArrayAdapter<Area> adapter = new ArrayAdapter<Area>(getApplication(), android.R.layout.simple_gallery_item, listArea);
-                        adapter.setDropDownViewResource(android.R.layout.simple_list_item_single_choice);
-                        spn_area_like.setAdapter(adapter);
-                    }
-
-                    @Override
-                    public void onFailure(Exception e) {
-
-                    }
-                });
-            }
-        });
+        loadListArea(cm.getListAreaWithUser() + user_id);
     }
 
 
@@ -131,7 +67,8 @@ public class LocationLike extends AppCompatActivity {
                         JSONObject jsonObject = object.getJSONObject(i);
                         listAreaUser.add(new Area(
                                 Integer.parseInt(jsonObject.getString("id")),
-                                jsonObject.getString("name")
+                                jsonObject.getString("name"),
+                                Integer.parseInt(jsonObject.getString("is_save"))
                         ));
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -146,30 +83,5 @@ public class LocationLike extends AppCompatActivity {
 
             }
         });
-    }
-
-    public void setNoification( Context context, int notificationId, String ChannelId) {
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplication(), "Your_channel_id")
-                .setSmallIcon(R.drawable.heart)
-                .setContentTitle("test")
-                .setContentText("test content")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(getApplication());
-
-        String channelId = "Your_channel_id";
-//        NotificationChannel channel = null;
-//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-//            NotificationManager mNotificationManager =
-//                    (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
-//            channel = new NotificationChannel(
-//                    channelId,
-//                    "Channel human readable title",
-//                    NotificationManager.IMPORTANCE_DEFAULT);
-//            mNotificationManager.createNotificationChannel(channel);
-//            mBuilder.setChannelId(channelId);
-//            mBuilder.setSmallIcon(R.drawable.heart);
-//        }
-
-        notificationManager.notify(notificationId, mBuilder.build());
     }
 }

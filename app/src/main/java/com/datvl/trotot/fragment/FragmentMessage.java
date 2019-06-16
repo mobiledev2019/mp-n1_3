@@ -34,7 +34,7 @@ public class FragmentMessage extends Fragment {
 
     RecyclerView recyclerView;
     List<MessageUser> listMessage;
-    Common cm;
+    Common cm = new Common();
     SharedPreferences sharedPreferences;
     ProgressBar progressBar;
     public String url;
