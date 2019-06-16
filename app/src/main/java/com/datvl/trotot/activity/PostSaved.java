@@ -28,7 +28,7 @@ public class PostSaved extends AppCompatActivity {
 
     RecyclerView recyclerView;
     List<Post> listPost;
-    Common cm;
+    Common cm = new Common();
     public String url;
     SharedPreferences sharedPreferences;
     ProgressBar pb;
@@ -39,8 +39,10 @@ public class PostSaved extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_saved);
         sharedPreferences = this.getSharedPreferences("user", Context.MODE_PRIVATE);
-        String user_id = sharedPreferences.getString("user_id", "0");
         view_type = sharedPreferences.getString("view_type", "List View");
+
+        String user_id = cm.getUserID(getApplication());
+
         url = cm.getUrlListPostsSaved() + user_id;
         GetApi getApi = new GetApi(url, getApplication(), new OnEventListener() {
             @Override

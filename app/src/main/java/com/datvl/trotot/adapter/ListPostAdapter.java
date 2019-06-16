@@ -33,7 +33,7 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.Recycl
 
     Animation animation;
     ViewGroup view;
-    Common cm;
+    Common cm = new Common();
     public String urlDelete = cm.getUrlDelete();
     public String urlSave = cm.getUrlPostSaved();
 
@@ -109,40 +109,45 @@ public class ListPostAdapter extends RecyclerView.Adapter<ListPostAdapter.Recycl
         holder.imgHeart.setOnClickListener(new View.OnClickListener() {
             int checked = data.get(position).getIs_save();
             SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
-            String user_id = sharedPreferences.getString("user_id", "0");
+            String user_id = cm.getUserID(view.getContext());
             @Override
             public void onClick(View v) {
-                if (checked == 0){
-                    GetApi getApi = new GetApi(urlSave + data.get(position).getId() + "/" + user_id, view.getContext(), new OnEventListener() {
-                        @Override
-                        public void onSuccess(JSONArray object) {
-                            cm.showToast(view.getContext(), "Đã lưu lại tin", Toast.LENGTH_SHORT);
-                        }
+                if (!user_id.equals("0")) {
+                    if (checked == 0){
+                        GetApi getApi = new GetApi(urlSave + data.get(position).getId() + "/" + user_id, view.getContext(), new OnEventListener() {
+                            @Override
+                            public void onSuccess(JSONArray object) {
+                                cm.showToast(view.getContext(), "Đã lưu lại tin", Toast.LENGTH_SHORT);
+                            }
 
-                        @Override
-                        public void onFailure(Exception e) {
-                            cm.showToast(view.getContext(), "Lỗi! Vui lòng thử lại", Toast.LENGTH_SHORT);
-                        }
-                    });
-                    holder.imgHeart.setImageResource(R.drawable.heart_active);
-                    checked = 1;
-                    holder.imgHeart.startAnimation(animation);
+                            @Override
+                            public void onFailure(Exception e) {
+                                cm.showToast(view.getContext(), "Lỗi! Vui lòng thử lại", Toast.LENGTH_SHORT);
+                            }
+                        });
+                        holder.imgHeart.setImageResource(R.drawable.heart_active);
+                        checked = 1;
+                        holder.imgHeart.startAnimation(animation);
+                    }
+                    else{
+                        GetApi getApi = new GetApi(urlDelete + data.get(position).getId() + "/" + user_id, view.getContext(), new OnEventListener() {
+                            @Override
+                            public void onSuccess(JSONArray object) {
+                                cm.showToast(view.getContext(), "Đã huỷ theo dõi tin này", Toast.LENGTH_SHORT);
+                            }
+
+                            @Override
+                            public void onFailure(Exception e) {
+                                cm.showToast(view.getContext(), "Lỗi! Vui lòng thử lại", Toast.LENGTH_SHORT);
+                            }
+                        });
+                        holder.imgHeart.setImageResource(R.drawable.heart);
+                        checked =0;
+                        holder.imgHeart.startAnimation(animation);
+                    }
                 }
-                else{
-                    GetApi getApi = new GetApi(urlDelete + data.get(position).getId() + "/" + user_id, view.getContext(), new OnEventListener() {
-                        @Override
-                        public void onSuccess(JSONArray object) {
-                            cm.showToast(view.getContext(), "Đã huỷ theo dõi tin này", Toast.LENGTH_SHORT);
-                        }
-
-                        @Override
-                        public void onFailure(Exception e) {
-                            cm.showToast(view.getContext(), "Lỗi! Vui lòng thử lại", Toast.LENGTH_SHORT);
-                        }
-                    });
-                    holder.imgHeart.setImageResource(R.drawable.heart);
-                    checked =0;
-                    holder.imgHeart.startAnimation(animation);
+                else {
+                    cm.showToast(view.getContext(), "Vui lòng đăng nhập để lưu tin", Toast.LENGTH_SHORT);
                 }
             }
         });
