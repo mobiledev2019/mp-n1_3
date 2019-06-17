@@ -43,13 +43,15 @@ public class FragmentMessage extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.activity_message,container,false);
+        final View view = inflater.inflate(R.layout.activity_message,container,false);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_list_message_user_view);
         progressBar = view.findViewById(R.id.progressBarListMessage);
 
         sharedPreferences = this.getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
-        url = cm.getListMessageUser() + cm.getUsername(this.getActivity());
+
+        final String username = cm.getUsername(this.getActivity());
+        url = cm.getListMessageUser() + username;
 
         listMessage = new ArrayList<>();
         progressBar.setVisibility(View.VISIBLE);
@@ -61,7 +63,7 @@ public class FragmentMessage extends Fragment {
                         JSONObject jsonObject = object.getJSONObject(i);
                         listMessage.add(new MessageUser(
                                 Integer.parseInt(jsonObject.getString("id")),
-                                jsonObject.getString("username_second"),
+                                username.equals(jsonObject.getString("username_second")) ? jsonObject.getString("username_first") : jsonObject.getString("username_second"),
                                 jsonObject.getString("created_at_string")
                         ));
                     } catch (JSONException e) {
