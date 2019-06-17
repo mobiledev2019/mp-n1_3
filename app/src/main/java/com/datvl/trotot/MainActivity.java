@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import com.datvl.trotot.api.GetApi;
+import com.datvl.trotot.service.MessageService;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements LocationListener{
@@ -176,6 +177,9 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        Intent intentService = new Intent(getApplication(), MessageService.class);
+        startService(intentService);
     }
 
     public String getFormatedNum(int amount){

@@ -146,29 +146,15 @@ public class Common {
         return user_id;
     }
 
-    public void setNoification( Context context, int notificationId, String ChannelId) {
+    public void setNoification( Context context, int notificationId, String ChannelId, String title, String content) {
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, "Your_channel_id")
                 .setSmallIcon(R.drawable.heart)
-                .setContentTitle("test")
-                .setContentText("test content")
+                .setContentTitle(title)
+                .setContentText(content)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-
         String channelId = "Your_channel_id";
-//        NotificationChannel channel = null;
-//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-//            NotificationManager mNotificationManager =
-//                    (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
-//            channel = new NotificationChannel(
-//                    channelId,
-//                    "Channel human readable title",
-//                    NotificationManager.IMPORTANCE_DEFAULT);
-//            mNotificationManager.createNotificationChannel(channel);
-//            mBuilder.setChannelId(channelId);
-//            mBuilder.setSmallIcon(R.drawable.heart);
-//        }
-
         notificationManager.notify(notificationId, mBuilder.build());
     }
 }

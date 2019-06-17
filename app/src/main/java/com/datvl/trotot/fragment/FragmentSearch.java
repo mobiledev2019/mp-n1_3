@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -48,6 +50,7 @@ public class FragmentSearch extends Fragment {
     Common cm;
     ProgressBar progressBar;
     String user_id;
+    Animation animation;
 
     @SuppressLint("ClickableViewAccessibility")
     @Nullable
@@ -58,6 +61,7 @@ public class FragmentSearch extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_search_view);
         progressBar = view.findViewById(R.id.progressBarSearch);
         edt_search = (EditText) view.findViewById(R.id.edt_search);
+        animation = AnimationUtils.loadAnimation(view.getContext(), R.anim.scale_list);
 
         SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
 
@@ -79,10 +83,10 @@ public class FragmentSearch extends Fragment {
                     }
                 }
 
-                if (listKeysearch.toString().equals("[]")){
-                    Log.d(TAG, "test mess: " + listKeysearch);
-                    Toast.makeText(getActivity(),"Vui lòng đăng nhập để xem tin ", Toast.LENGTH_SHORT).show();
-                }
+//                if (listKeysearch.toString().equals("[]")){
+//                    Log.d(TAG, "test mess: " + listKeysearch);
+//                    Toast.makeText(getActivity(),"Vui lòng đăng nhập để xem tin ", Toast.LENGTH_SHORT).show();
+//                }
 
                 eventAfterClick();
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -112,6 +116,7 @@ public class FragmentSearch extends Fragment {
                 recyclerView.setVisibility(View.GONE);
                 if (event.getAction() == MotionEvent.ACTION_UP) {
                     if (event.getRawX() >= (edt_search.getRight() - 2 * edt_search.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        edt_search.startAnimation(animation);
                         String key = String.valueOf(edt_search.getText());
                         loadPostByKeword(key);
                         return true;

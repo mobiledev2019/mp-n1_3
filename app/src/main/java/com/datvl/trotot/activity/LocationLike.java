@@ -46,8 +46,6 @@ public class LocationLike extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycler_area_like);
 
-        cm.setNoification( this, 123, "datvl");
-
         final List<Area> listArea = new ArrayList<>();
 
         String user_id = cm.getUserID(getApplication());

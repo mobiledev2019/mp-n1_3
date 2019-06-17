@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.datvl.trotot">
+
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -23,9 +24,12 @@
         android:theme="@style/AppThemeNoActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
+        <service
+            android:name=".service.MessageService"
+            android:enabled="true"
+            android:exported="true"></service>
 
-        <activity android:name=".activity.LocationLike"/>
-
+        <activity android:name=".activity.LocationLike" />
         <activity android:name=".activity.NewPost" />
 
         <meta-data
@@ -44,9 +48,7 @@
         </activity>
         <activity
             android:name=".activity.PostDetail"
-            android:theme="@style/AppTheme">
-
-        </activity>
+            android:theme="@style/AppTheme"></activity>
         <activity
             android:name=".activity.PostSaved"
             android:label="Bài tin đã lưu"
