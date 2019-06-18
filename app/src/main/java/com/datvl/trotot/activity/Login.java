@@ -114,4 +114,13 @@ public class Login extends AppCompatActivity {
         });
 
     }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        if (!cm.getUserID(getApplication()).equals("0")) {
+            final Intent intent= new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(intent);
+        }
+    }
 }
