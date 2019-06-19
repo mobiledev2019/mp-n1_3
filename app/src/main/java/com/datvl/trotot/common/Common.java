@@ -16,63 +16,65 @@ public class Common {
 //    static String ip = "192.168.1.12";
 //    static String ip = "192.168.1.12";
 //    static String ip = "192.168.43.230";
-    static String ip = "192.168.1.12";
+    static String ip = "192.168.0.186";
+//    static String prefix = "/trotot/public";
+    static String prefix = "";
 
     public Common() {
     }
 
     public static String getUrlLogin() {
-        String url = "http://" + ip + "/trotot/public/login/";
+        String url = "http://" + ip + prefix +  "/login/";
         return url;
     }
 
     public static String getUrlListPosts() {
-        String url = "http://" + ip + "/trotot/public/list-posts";
+        String url = "http://" + ip + prefix +  "/list-posts";
         return url;
     }
 
     public static String getUrlListPostsUser() {
-        String url = "http://" + ip + "/trotot/public/list-posts-users/";
+        String url = "http://" + ip + prefix +  "/list-posts-users/";
         return url;
     }
 
     public static String getUrlListPostsSaved() {
-        String url = "http://" + ip + "/trotot/public/list-posts-saved/";
+        String url = "http://" + ip + prefix +  "/list-posts-saved/";
         return url;
     }
 
     public static String getUrlListSearch() {
-        String url = "http://" + ip + "/trotot/public/search/";
+        String url = "http://" + ip + prefix +  "/search/";
         return url;
     }
 
     public static String getUrlPost() {
-        String url = "http://" + ip + "/trotot/public/post/";
+        String url = "http://" + ip + prefix +  "/post/";
         return url;
     }
 
     public static String getUrlPostSaved() {
-        String url = "http://" + ip + "/trotot/public/post-saved/";
+        String url = "http://" + ip + prefix +  "/post-saved/";
         return url;
     }
 
     public static String getUrlDelete() {
-        String url = "http://" + ip + "/trotot/public/delete-post-saved/";
+        String url = "http://" + ip + prefix +  "/delete-post-saved/";
         return url;
     }
 
     public static String getMessageID() {
-        String url = "http://" + ip + "/trotot/public/message-id/";
+        String url = "http://" + ip + prefix +  "/message-id/";
         return url;
     }
 
     public static String getListMessageUser() {
-        String url = "http://" + ip + "/trotot/public/list-message-username/";
+        String url = "http://" + ip + prefix +  "/list-message-username/";
         return url;
     }
 
     public static String deleteMessage() {
-        String url = "http://" + ip + "/trotot/public/list-message-delete/";
+        String url = "http://" + ip + prefix +  "/list-message-delete/";
         return url;
     }
 
@@ -86,42 +88,47 @@ public class Common {
     }
 
     public static String getListKeySearch() {
-        String url = "http://" + ip + "/trotot/public/key-search/";
+        String url = "http://" + ip + prefix +  "/key-search/";
         return url;
     }
 
     public static String addKeyword() {
-        String url = "http://" + ip + "/trotot/public/saveKeyword/";
+        String url = "http://" + ip + prefix +  "/saveKeyword/";
         return url;
     }
 
     public static String deleteKeyword() {
-        String url = "http://" + ip + "/trotot/public/list-keyword-delete/";
+        String url = "http://" + ip + prefix +  "/list-keyword-delete/";
         return url;
     }
 
     public static String getListArea() {
-        String url = "http://" + ip + "/trotot/public/list-area";
+        String url = "http://" + ip + prefix +  "/list-area";
         return url;
     }
 
     public static String getListAreaByUser() {
-        String url = "http://" + ip + "/trotot/public/list-area-user/";
+        String url = "http://" + ip + prefix +  "/list-area-user/";
         return url;
     }
 
     public static String getListAreaWithUser() {
-        String url = "http://" + ip + "/trotot/public/list-area-saved/";
+        String url = "http://" + ip + prefix +  "/list-area-saved/";
         return url;
     }
 
     public static String saveAreaByUser() {
-        String url = "http://" + ip + "/trotot/public/save-area-liked/";
+        String url = "http://" + ip + prefix +  "/save-area-liked/";
         return url;
     }
 
     public static String deleteAreaByUser() {
-        String url = "http://" + ip + "/trotot/public/delete-area-liked/";
+        String url = "http://" + ip + prefix +  "/delete-area-liked/";
+        return url;
+    }
+
+    public static String getUrlNewPost() {
+        String url = "http://" + ip + prefix +  "/new-post";
         return url;
     }
 
