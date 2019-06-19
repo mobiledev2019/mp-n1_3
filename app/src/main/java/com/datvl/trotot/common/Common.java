@@ -16,7 +16,7 @@ public class Common {
 //    static String ip = "192.168.1.12";
 //    static String ip = "192.168.1.12";
 //    static String ip = "192.168.43.230";
-    static String ip = "192.168.1.12";
+    static String ip = "192.168.31.120";
 
     public Common() {
     }
@@ -33,6 +33,11 @@ public class Common {
 
     public static String getUrlListPostsUser() {
         String url = "http://" + ip + "/trotot/public/list-posts-users/";
+        return url;
+    }
+
+    public static String getUrlListPostsArea() {
+        String url = "http://" + ip + "/trotot/public/list-posts-area/";
         return url;
     }
 

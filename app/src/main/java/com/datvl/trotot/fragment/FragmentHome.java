@@ -42,9 +42,12 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.android.volley.VolleyLog.TAG;
+
 public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     RecyclerView recyclerView;
+    RecyclerView recyclerViewAera;
     List<Post> listPost;
     Common cm;
     SharedPreferences sharedPreferences;
@@ -60,7 +63,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.activity_home,container,false);
         setNewPost(view);
-
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_home_view);
         gestureScanner = new GestureDetector(new Gesture());
         view.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -205,7 +208,65 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                         e.printStackTrace();
                     }
                 }
-                setAdapterSpinner("address",price_type, spin_address, listArea, editor);
+//                setAdapterSpinner("address",price_type, spin_address, listArea, editor);
+
+                ArrayAdapter<Area> adapter=new ArrayAdapter<Area>
+                        (
+                                getActivity(),
+                                android.R.layout.simple_spinner_item,
+                                listArea
+                        );
+                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                spin_address.setAdapter(adapter);
+
+                final int iCurrentSelectionAdd = spin_address.getSelectedItemPosition();
+                spin_address.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                    @Override
+                    public void onItemSelected(AdapterView<?> parent, final View view, int position, long id) {
+                        Log.d(TAG, "area_id: " + listArea.get(position).getId());
+                        listPost.clear();
+                        setLayout(view_type, recyclerView, view);
+                        if(iCurrentSelectionAdd != position){
+                            listPost = new ArrayList<>();
+                            GetApi api_area = new GetApi(cm.getUrlListPostsArea() + position, getActivity(), new OnEventListener() {
+                                @Override
+                                public void onSuccess(JSONArray object) {
+                                    for (int i=0 ; i< object.length() ; i++){
+                                        try {
+                                            JSONObject jsonObject = object.getJSONObject(i);
+                                            listPost.add(new Post(
+                                                    Integer.parseInt(jsonObject.getString("id")),
+                                                    jsonObject.getString("name"),
+                                                    Integer.parseInt(jsonObject.getString("price")) ,
+                                                    jsonObject.getString("image"),
+                                                    jsonObject.getString("content"),
+                                                    jsonObject.getString("area_name"),
+                                                    jsonObject.getString("created_at_string"),
+                                                    Integer.parseInt(jsonObject.getString("scale"))
+                                            ));
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+
+                                    setLayout(view_type, recyclerView, view);
+                                }
+
+                                @Override
+                                public void onFailure(Exception e) {
+                                    Log.e(TAG, "onFailure: ", e );
+                                }
+                            });
+                            reloadFragment();
+                        }
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> parent) {
+
+                    }
+                });
+
             }
 
             @Override
@@ -235,7 +296,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
     }
 
     public void setLayout(String view_type, RecyclerView recyclerView, View view){
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_home_view);
+//        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_home_view);
         switch (view_type) {
             case "Grid View":
                 recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
@@ -245,6 +306,8 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                 break;
         }
         ListPostAdapter viewAdapter = new ListPostAdapter(listPost);
+        viewAdapter.notifyDataSetChanged();
+
         recyclerView.setAdapter(viewAdapter);
     }
 
@@ -257,18 +320,6 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                 );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(adapter);
-
-        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         switch (type){
             case "view":
@@ -297,7 +348,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
 
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, final View view, int position, long id) {
                 switch (type){
                     case "view":
                         if(iCurrentSelection != position){
@@ -311,13 +362,6 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                             editor.putString("price_type", parent.getAdapter().getItem(position).toString());
                             editor.commit();
                             reloadFragment();
-                        }
-                        break;
-                    case "address":
-                        if(iCurrentSelection != position){
-                            editor.putString("address_type", parent.getAdapter().getItem(position).toString());
-                            editor.commit();
-//                            reloadFragment();
                         }
                         break;
                 }
