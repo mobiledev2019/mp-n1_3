@@ -223,12 +223,10 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                 spin_address.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, final View view, int position, long id) {
-                        Log.d(TAG, "area_id: " + listArea.get(position).getId());
                         listPost.clear();
-                        setLayout(view_type, recyclerView, view);
                         if(iCurrentSelectionAdd != position){
                             listPost = new ArrayList<>();
-                            GetApi api_area = new GetApi(cm.getUrlListPostsArea() + position, getActivity(), new OnEventListener() {
+                            GetApi api_area = new GetApi(cm.getUrlListPostsArea(listArea.get(position).getId()), getActivity(), new OnEventListener() {
                                 @Override
                                 public void onSuccess(JSONArray object) {
                                     for (int i=0 ; i< object.length() ; i++){
@@ -239,7 +237,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                                                     jsonObject.getString("name"),
                                                     Integer.parseInt(jsonObject.getString("price")) ,
                                                     jsonObject.getString("image"),
-                                                    jsonObject.getString("content"),
+                                                    ""+jsonObject.getString("content"),
                                                     jsonObject.getString("area_name"),
                                                     jsonObject.getString("created_at_string"),
                                                     Integer.parseInt(jsonObject.getString("scale"))
@@ -257,7 +255,6 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                                     Log.e(TAG, "onFailure: ", e );
                                 }
                             });
-                            reloadFragment();
                         }
                     }
 
