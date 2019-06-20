@@ -25,6 +25,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.datvl.trotot.activity.NewPost;
 import com.datvl.trotot.OnEventListener;
@@ -61,7 +62,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
     @Nullable
     @Override
     public View onCreateView(final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.activity_home,container,false);
+        final View view = inflater.inflate(R.layout.activity_home, container, false);
         setNewPost(view);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_home_view);
         gestureScanner = new GestureDetector(new Gesture());
@@ -76,7 +77,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
         sharedPreferences = this.getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
         Boolean is_login = sharedPreferences.getBoolean("is_login", false);
         url = cm.getUrlListPostsUser() + sharedPreferences.getString("user_id", "0");
-        if ( is_login == false) {
+        if (is_login == false) {
             url = cm.getUrlListPosts();
         }
 
@@ -89,13 +90,13 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
         GetApi getApi = new GetApi(url, getActivity(), new OnEventListener() {
             @Override
             public void onSuccess(JSONArray object) {
-                for (int i=0 ; i< object.length() ; i++){
+                for (int i = 0; i < object.length(); i++) {
                     try {
                         JSONObject jsonObject = object.getJSONObject(i);
                         listPost.add(new Post(
                                 Integer.parseInt(jsonObject.getString("id")),
                                 jsonObject.getString("name"),
-                                Integer.parseInt(jsonObject.getString("price")) ,
+                                Integer.parseInt(jsonObject.getString("price")),
                                 jsonObject.getString("image"),
                                 jsonObject.getString("content"),
                                 jsonObject.getString("address"),
@@ -132,18 +133,20 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
             public void onRefresh() {
                 new Handler().postDelayed(new Runnable() {
                     List<Post> listPost;
-                    @Override public void run() {
+
+                    @Override
+                    public void run() {
                         listPost = new ArrayList<>();
                         GetApi getApi = new GetApi(url, getActivity(), new OnEventListener() {
                             @Override
                             public void onSuccess(JSONArray object) {
-                                for (int i=0 ; i< object.length() ; i++){
+                                for (int i = 0; i < object.length(); i++) {
                                     try {
                                         JSONObject jsonObject = object.getJSONObject(i);
                                         listPost.add(new Post(
                                                 Integer.parseInt(jsonObject.getString("id")),
                                                 jsonObject.getString("name"),
-                                                Integer.parseInt(jsonObject.getString("price")) ,
+                                                Integer.parseInt(jsonObject.getString("price")),
                                                 jsonObject.getString("image"),
                                                 jsonObject.getString("content"),
                                                 jsonObject.getString("area_name"),
@@ -185,19 +188,19 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
     public void filter(final View view) {
         final SharedPreferences sharedPreferences = this.getActivity().getSharedPreferences("fillter", Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPreferences.edit();
-        final Spinner spin=(Spinner) view.findViewById(R.id.spinner_view);
-        final Spinner spin_price=(Spinner) view.findViewById(R.id.spinner_price);
-        final Spinner spin_address=(Spinner) view.findViewById(R.id.spinner_address);
+        final Spinner spin = (Spinner) view.findViewById(R.id.spinner_view);
+        final Spinner spin_price = (Spinner) view.findViewById(R.id.spinner_price);
+        final Spinner spin_address = (Spinner) view.findViewById(R.id.spinner_address);
         final String view_type = sharedPreferences.getString("view_type", "Grid View");
-        final String price_type = sharedPreferences.getString("price_type", "Price ");
+        final String price_type = sharedPreferences.getString("price_type", "Price");
 
 
         final List<Area> listArea = new ArrayList<>();
-
+        listArea.add(new Area(0, "Tất Cả"));
         GetApi getApi = new GetApi(cm.getListArea(), getActivity(), new OnEventListener() {
             @Override
             public void onSuccess(JSONArray object) {
-                for (int i=0 ; i< object.length() ; i++){
+                for (int i = 0; i < object.length(); i++) {
                     try {
                         JSONObject jsonObject = object.getJSONObject(i);
 
@@ -210,7 +213,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                 }
 //                setAdapterSpinner("address",price_type, spin_address, listArea, editor);
 
-                ArrayAdapter<Area> adapter=new ArrayAdapter<Area>
+                ArrayAdapter<Area> adapter = new ArrayAdapter<Area>
                         (
                                 getActivity(),
                                 android.R.layout.simple_spinner_item,
@@ -223,39 +226,52 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                 spin_address.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                     @Override
                     public void onItemSelected(AdapterView<?> parent, final View view, int position, long id) {
-                        listPost.clear();
-                        if(iCurrentSelectionAdd != position){
-                            listPost = new ArrayList<>();
-                            GetApi api_area = new GetApi(cm.getUrlListPostsArea(listArea.get(position).getId()), getActivity(), new OnEventListener() {
-                                @Override
-                                public void onSuccess(JSONArray object) {
-                                    for (int i=0 ; i< object.length() ; i++){
-                                        try {
-                                            JSONObject jsonObject = object.getJSONObject(i);
-                                            listPost.add(new Post(
-                                                    Integer.parseInt(jsonObject.getString("id")),
-                                                    jsonObject.getString("name"),
-                                                    Integer.parseInt(jsonObject.getString("price")) ,
-                                                    jsonObject.getString("image"),
-                                                    ""+jsonObject.getString("content"),
-                                                    jsonObject.getString("area_name"),
-                                                    jsonObject.getString("created_at_string"),
-                                                    Integer.parseInt(jsonObject.getString("scale"))
-                                            ));
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
+                        final SharedPreferences sharedPreferences = getActivity().getSharedPreferences("fillter", Context.MODE_PRIVATE);
+                        final SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putInt("keyArea", listArea.get(position).getId());
+                        editor.commit();
+                        int price = 0;
+                        switch (sharedPreferences.getString("price_type", "giá")) {
+                            case "Price ⇧":
+                                price = 1;
+                                break;
+                            case "Price ⇩":
+                                price = 2;
+                                break;
 
-                                    setLayout(view_type, recyclerView, view);
-                                }
-
-                                @Override
-                                public void onFailure(Exception e) {
-                                    Log.e(TAG, "onFailure: ", e );
-                                }
-                            });
                         }
+                        listPost.clear();
+                        listPost = new ArrayList<>();
+                        GetApi api_area = new GetApi(cm.getUrlListPostsArea(listArea.get(position).getId(), price), getActivity(), new OnEventListener() {
+                            @Override
+                            public void onSuccess(JSONArray object) {
+                                for (int i = 0; i < object.length(); i++) {
+                                    try {
+                                        JSONObject jsonObject = object.getJSONObject(i);
+                                        listPost.add(new Post(
+                                                Integer.parseInt(jsonObject.getString("id")),
+                                                jsonObject.getString("name"),
+                                                Integer.parseInt(jsonObject.getString("price")),
+                                                jsonObject.getString("image"),
+                                                "" + jsonObject.getString("content"),
+                                                jsonObject.getString("area_name"),
+                                                jsonObject.getString("created_at_string"),
+                                                Integer.parseInt(jsonObject.getString("scale"))
+                                        ));
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                setLayout(view_type, recyclerView, view);
+                            }
+
+                            @Override
+                            public void onFailure(Exception e) {
+                                Log.e(TAG, "onFailure: ", e);
+                            }
+                        });
+
                     }
 
                     @Override
@@ -277,22 +293,23 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
         arr_view_type.add("List View");
 
         List arr_price_type = new ArrayList();
+        arr_price_type.add("Giá");
         arr_price_type.add("Price ⇧");
         arr_price_type.add("Price ⇩");
 
-        setAdapterSpinner("price",price_type, spin_price, arr_price_type, editor);
-        setAdapterSpinner("view",view_type, spin, arr_view_type, editor);
+        setAdapterSpinner("price", price_type, spin_price, arr_price_type, editor);
+        setAdapterSpinner("view", view_type, spin, arr_view_type, editor);
     }
 
-    public void reloadFragment(){
+    public void reloadFragment() {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         FragmentHome fragmentHome = new FragmentHome();
-        fragmentTransaction.replace(R.id.content,fragmentHome);
+        fragmentTransaction.replace(R.id.content, fragmentHome);
         fragmentTransaction.commit();
     }
 
-    public void setLayout(String view_type, RecyclerView recyclerView, View view){
+    public void setLayout(String view_type, RecyclerView recyclerView, View view) {
 //        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_home_view);
         switch (view_type) {
             case "Grid View":
@@ -308,17 +325,17 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
         recyclerView.setAdapter(viewAdapter);
     }
 
-    public void setAdapterSpinner(final String type, String data, Spinner spin, List listArea, final SharedPreferences.Editor editor){
-        ArrayAdapter<Area> adapter=new ArrayAdapter<Area>
+    public void setAdapterSpinner(final String type, String data, Spinner spin, List listArea, final SharedPreferences.Editor editor) {
+        ArrayAdapter<Area> adapter = new ArrayAdapter<Area>
                 (
-                    this.getActivity(),
-                    android.R.layout.simple_spinner_item,
-                    listArea
+                        this.getActivity(),
+                        android.R.layout.simple_spinner_item,
+                        listArea
                 );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(adapter);
 
-        switch (type){
+        switch (type) {
             case "view":
                 switch (data) {
                     case "Grid View":
@@ -329,16 +346,19 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                         break;
                 }
                 break;
-            case "price":
-                switch (data) {
-                    case "Price ⇧":
-                        spin.setSelection(0);
-                        break;
-                    case "Price ⇩":
-                        spin.setSelection(1);
-                        break;
-                }
-                break;
+//            case "price":
+//                switch (data) {
+//                    case "Giá":
+//                        spin.setSelection(0);
+//                        break;
+//                    case "Price ⇧":
+//                        spin.setSelection(1);
+//                        break;
+//                    case "Price ⇩":
+//                        spin.setSelection(2);
+//                        break;
+//                }
+//                break;
         }
 
         final int iCurrentSelection = spin.getSelectedItemPosition();
@@ -346,20 +366,50 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
         spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, final View view, int position, long id) {
-                switch (type){
+                switch (type) {
                     case "view":
-                        if(iCurrentSelection != position){
+                        if (iCurrentSelection != position) {
                             editor.putString("view_type", parent.getAdapter().getItem(position).toString());
                             editor.commit();
                             reloadFragment();
                         }
                         break;
                     case "price":
-                        if(iCurrentSelection != position){
-                            editor.putString("price_type", parent.getAdapter().getItem(position).toString());
-                            editor.commit();
-                            reloadFragment();
-                        }
+                        editor.putString("price_type", parent.getAdapter().getItem(position).toString());
+                        editor.commit();
+                        listPost.clear();
+                        listPost = new ArrayList<>();
+                        final SharedPreferences sharedPreferences = getActivity().getSharedPreferences("fillter", Context.MODE_PRIVATE);
+                        GetApi getApi = new GetApi(cm.getUrlListPostsArea(sharedPreferences.getInt("keyArea", 0), position), getActivity(), new OnEventListener() {
+                            @Override
+                            public void onSuccess(JSONArray object) {
+                                for (int i = 0; i < object.length(); i++) {
+                                    try {
+                                        JSONObject jsonObject = object.getJSONObject(i);
+                                        listPost.add(new Post(
+                                                Integer.parseInt(jsonObject.getString("id")),
+                                                jsonObject.getString("name"),
+                                                Integer.parseInt(jsonObject.getString("price")),
+                                                jsonObject.getString("image"),
+                                                "" + jsonObject.getString("content"),
+                                                jsonObject.getString("area_name"),
+                                                jsonObject.getString("created_at_string"),
+                                                Integer.parseInt(jsonObject.getString("scale"))
+                                        ));
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+
+                                setLayout(view_type, recyclerView, view);
+                            }
+
+                            @Override
+                            public void onFailure(Exception e) {
+
+                            }
+                        });
+
                         break;
                 }
             }
@@ -369,12 +419,13 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
             }
         });
     }
+
     class Gesture extends GestureDetector.SimpleOnGestureListener {
         @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             Log.d("MotionEvent", "onFling");
             try {
-                if (Math.abs(e1.getY() - e2.getY()) > 100){
+                if (Math.abs(e1.getY() - e2.getY()) > 100) {
                     Log.d("touch", "onFling: +");
                     return true;
                 }
