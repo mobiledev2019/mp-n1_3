@@ -38,8 +38,8 @@ public class Common {
         return url;
     }
 
-    public static String getUrlListPostsArea(int i) {
-        String url = "http://" + ip + "/trotot/public/list-posts-area/"+i;
+    public static String getUrlListPostsArea(int area,int price) {
+        String url = "http://" + ip + "/trotot/public/list-posts-area/"+area+"/"+price;
         return url;
     }
 
