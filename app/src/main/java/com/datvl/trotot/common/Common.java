@@ -16,9 +16,9 @@ public class Common {
 //    static String ip = "192.168.1.12";
 //    static String ip = "192.168.1.12";
 //    static String ip = "192.168.43.230";
-    static String ip = "192.168.0.186";
-//    static String prefix = "/trotot/public";
-    static String prefix = "";
+    static String ip = "192.168.31.120";
+    static String prefix = "/trotot/public";
+//    static String prefix = "";
 
     public Common() {
     }
@@ -35,6 +35,11 @@ public class Common {
 
     public static String getUrlListPostsUser() {
         String url = "http://" + ip + prefix +  "/list-posts-users/";
+        return url;
+    }
+
+    public static String getUrlListPostsArea(int i) {
+        String url = "http://" + ip + "/trotot/public/list-posts-area/"+i;
         return url;
     }
 
@@ -127,11 +132,15 @@ public class Common {
         return url;
     }
 
-    public static String getUrlNewPost() {
-        String url = "http://" + ip + prefix +  "/new-post";
+    public static String getUrlNewPost(String name, String nd, String price, String img, String scale, String u_id) {
+        String url = "http://" + ip + prefix +  "/new-post?name=" +name + "&postContent=" +nd+ "&price="+price+"&image="+ img+"&scale="+scale+"&areaId="+u_id;
         return url;
     }
 
+    public static String getNoticeSearch() {
+        String url = "http://" + ip + prefix + "/get-notice-search/nha";
+        return url;
+    }
 
 
 

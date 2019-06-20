@@ -45,6 +45,7 @@ import java.util.List;
 import java.util.Locale;
 import com.datvl.trotot.api.GetApi;
 import com.datvl.trotot.service.MessageService;
+import com.datvl.trotot.service.NoticeSearchService;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity implements LocationListener{
@@ -177,6 +178,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+
+        Intent searchService = new Intent(getApplication(), NoticeSearchService.class);
+        startService(searchService);
 
         Intent intentService = new Intent(getApplication(), MessageService.class);
         startService(intentService);
