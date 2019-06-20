@@ -25,9 +25,13 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
         <service
-            android:name=".service.MessageService"
+            android:name=".service.NoticeSearchService"
             android:enabled="true"
             android:exported="true"></service>
+        <service
+            android:name=".service.MessageService"
+            android:enabled="true"
+            android:exported="true" />
 
         <activity android:name=".activity.LocationLike" />
         <activity android:name=".activity.NewPost" />
@@ -48,7 +52,7 @@
         </activity>
         <activity
             android:name=".activity.PostDetail"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity
             android:name=".activity.PostSaved"
             android:label="Bài tin đã lưu"
