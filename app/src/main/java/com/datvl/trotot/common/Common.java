@@ -130,6 +130,10 @@ public class Common {
         return url;
     }
 
+    public static String getNoticeSearch() {
+        String url = "http://" + ip + "/trotot/public/get-notice-search/nha";
+        return url;
+    }
 
 
 
