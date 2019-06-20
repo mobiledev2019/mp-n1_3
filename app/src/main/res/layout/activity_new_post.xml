@@ -4,6 +4,128 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.NewPost">
+    tools:context=".NewPost">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="3"
+            tools:ignore="MissingConstraints">
+
+            <ImageView
+                android:id="@+id/image1"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="150dp"
+                android:padding="25dp"
+                app:srcCompat="@drawable/ic_camera_alt_grey_24dp" />
+
+            <ImageView
+                android:id="@+id/image2"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:padding="25dp"
+                app:srcCompat="@drawable/ic_camera_alt_grey_24dp" />
+
+            <ImageView
+                android:id="@+id/image3"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="150dp"
+                android:padding="25dp"
+                app:srcCompat="@drawable/ic_camera_alt_grey_24dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:paddingLeft="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tiêu đề"/>
+
+            <EditText
+                android:id="@+id/edt_post_name"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/template_edit_text_border"
+                />
+
+            <TextView
+                android:paddingLeft="20dp"
+                android:text="Nội dung"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:paddingLeft="20dp"
+                android:id="@+id/edt_post_content"
+                android:background="@drawable/template_edit_text_border"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:paddingLeft="20dp"
+                android:text="Giá"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/edt_post_price"
+                android:background="@drawable/template_edit_text_border"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:paddingLeft="20dp"
+                android:text="Diện tích"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/edt_post_scale"
+                android:background="@drawable/template_edit_text_border"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:paddingLeft="20dp"
+                android:id="@+id/edt_post_address"
+                android:text="Địa chỉ"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:id="@+id/spinner_post_address"
+                android:layout_width="match_parent"
+                android:layout_height="30dp" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_send_post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Post"
+        android:textColor="@color/colorWhite"
+        android:background="@color/colorGreen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
