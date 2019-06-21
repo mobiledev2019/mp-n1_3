@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.datvl.trotot">
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -25,18 +29,21 @@
         android:theme="@style/AppThemeNoActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".activity.RegisActivity"
+            android:label="@string/title_activity_regis"></activity>
+
         <service
             android:name=".service.NoticeSearchService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
         <service
             android:name=".service.MessageService"
             android:enabled="true"
             android:exported="true" />
 
         <activity android:name=".activity.LocationLike" />
-        <activity android:name=".activity.NewPost" >
-        </activity>
+        <activity android:name=".activity.NewPost"></activity>
 
         <meta-data
             android:name="com.google.android.actions"
@@ -51,7 +58,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".activity.PostDetail"

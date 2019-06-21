@@ -143,23 +143,6 @@ public class NewPost extends AppCompatActivity {
         btnSendPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String td = String.valueOf(edt_td.getText());
-                String nd = String.valueOf(edt_nd.getText());
-                String price = String.valueOf(edt_price.getText());
-                String scale = String.valueOf(edt_scale.getText());
-
-                GetApi getApi = new GetApi(cm.getUrlNewPost(td, nd,price, "", scale, cm.getUserID(getApplication())), getApplication(), new OnEventListener() {
-                    @Override
-                    public void onSuccess(JSONArray object) {
-
-                    }
-
-                    @Override
-                    public void onFailure(Exception e) {
-                        Log.d(TAG, "onFailure: " + e);
-                    }
-                });
-
                 sendPostToServer();
             }
         });
@@ -226,7 +209,7 @@ public class NewPost extends AppCompatActivity {
             riversRef.putBytes(byte_arr).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    progressDialog.hide();
+                    savePost(progressDialog, String.valueOf(taskSnapshot.getDownloadUrl()));
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -235,5 +218,24 @@ public class NewPost extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    protected void savePost(final ProgressDialog progressDialog, String linkImage) {
+        String td = String.valueOf(edt_td.getText());
+        String nd = String.valueOf(edt_nd.getText());
+        String price = String.valueOf(edt_price.getText());
+        String scale = String.valueOf(edt_scale.getText());
+
+        GetApi getApi = new GetApi(cm.getUrlNewPost(td, nd,price, linkImage, scale, cm.getUserID(getApplication())), getApplication(), new OnEventListener() {
+            @Override
+            public void onSuccess(JSONArray object) {
+                progressDialog.hide();
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                Log.d(TAG, "onFailure: " + e);
+            }
+        });
     }
 }

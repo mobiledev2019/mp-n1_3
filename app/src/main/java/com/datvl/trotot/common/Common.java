@@ -28,6 +28,11 @@ public class Common {
         return url;
     }
 
+    public static String getUrlRegis() {
+        String url = "http://" + ip + prefix +  "/regis/";
+        return url;
+    }
+
     public static String getUrlListPosts() {
         String url = "http://" + ip + prefix +  "/list-posts";
         return url;

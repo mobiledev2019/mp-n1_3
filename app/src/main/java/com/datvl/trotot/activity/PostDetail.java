@@ -33,7 +33,7 @@ import org.json.JSONObject;
 public class PostDetail extends AppCompatActivity {
 
     Post post;
-    Common cm;
+    Common cm = new Common();
     private ProgressDialog pg = null;
     public String url = cm.getUrlPost();
     String phone = "191";
@@ -50,7 +50,7 @@ public class PostDetail extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_detail);
-        setTitle("");
+        setTitle("Chi tiết");
         pb = (ProgressBar)findViewById(R.id.progressBarDetail);
         postDetail = (ConstraintLayout)findViewById(R.id.post_detail);
         animation = AnimationUtils.loadAnimation(getApplication(), R.anim.scale_list);
@@ -58,6 +58,7 @@ public class PostDetail extends AppCompatActivity {
 
 //      ẩn nội dung trước khi load được dữ liệu
         postDetail.setVisibility(View.GONE);
+        pb.setVisibility(View.VISIBLE);
 
         Intent intent = getIntent();
         post = (Post) intent.getSerializableExtra("post");
@@ -109,6 +110,7 @@ public class PostDetail extends AppCompatActivity {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                pb.setVisibility(View.GONE);
             }
 
             @Override
@@ -153,17 +155,23 @@ public class PostDetail extends AppCompatActivity {
             }
         });
 
+
         btn_chat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                String u_id = cm.getUsername(getApplication());
+                if (!u_id.equals(created_by)) {
                 final Intent intent= new Intent(v.getContext(), Chat.class);
 
                 intent.putExtra("post", post);
                 intent.putExtra("username2", created_by);
 
                 v.getContext().startActivity(intent);
+                }
             }
         });
+
 
     }
 

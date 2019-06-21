@@ -57,7 +57,7 @@ public class ListKeySearchAdapter extends RecyclerView.Adapter<ListKeySearchAdap
 
         final String url = cm.deleteKeyword() + data.get(position).getId();
         holder.txtKeyword.setText(data.get(position).getKeyword());
-        holder.txtStt.setText("" + position);
+        holder.txtStt.setText("" + (position + 1));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

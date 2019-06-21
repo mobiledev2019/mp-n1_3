@@ -70,10 +70,6 @@ public class FragmentMessage extends Fragment {
                         e.printStackTrace();
                     }
                 }
-//                if (listMessage.toString().equals("[]")){
-//                    Log.d(TAG, "test mess: " + listMessage);
-//                    Toast.makeText(getActivity(),"Vui lòng đăng nhập để xem tin ", Toast.LENGTH_SHORT).show();
-//                }
 
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("fillter", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();

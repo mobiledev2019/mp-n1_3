@@ -66,7 +66,7 @@ public class FragmentSearch extends Fragment {
         SharedPreferences sharedPreferences = view.getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
 
         user_id = cm.getUserID(view.getContext());
-
+        progressBar.setVisibility(View.VISIBLE);
         GetApi getApi = new GetApi(cm.getListKeySearch() + user_id, getActivity(), new OnEventListener() {
             @Override
             public void onSuccess(JSONArray object) {
@@ -83,11 +83,6 @@ public class FragmentSearch extends Fragment {
                     }
                 }
 
-//                if (listKeysearch.toString().equals("[]")){
-//                    Log.d(TAG, "test mess: " + listKeysearch);
-//                    Toast.makeText(getActivity(),"Vui lòng đăng nhập để xem tin ", Toast.LENGTH_SHORT).show();
-//                }
-
                 eventAfterClick();
                 recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
                 ListKeySearchAdapter viewAdapter = new ListKeySearchAdapter(listKeysearch, new OnItemClickListener() {
@@ -97,6 +92,7 @@ public class FragmentSearch extends Fragment {
                     }
                 });
                 recyclerView.setAdapter(viewAdapter);
+                progressBar.setVisibility(View.GONE);
             }
             @Override
             public void onFailure(Exception e) {
