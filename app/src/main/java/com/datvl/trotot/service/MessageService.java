@@ -85,11 +85,14 @@ public class MessageService extends Service {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 Message value = dataSnapshot.getValue(Message.class);
-                cm.setNoification(getApplication(),
-                        111,
-                        "messageId",
-                        value.getUser(),
-                        value.getContent());
+                if (!value.getUser().equals(cm.getUsername(getApplication()))) {
+                    cm.setNoification(getApplication(),
+                            111,
+                            "messageId",
+                            value.getUser(),
+                            value.getContent());
+
+                }
             }
 
             @Override

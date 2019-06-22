@@ -197,6 +197,7 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
 
         final List<Area> listArea = new ArrayList<>();
         listArea.add(new Area(0, "Tất Cả"));
+        listArea.add(new Area(100, "GPS"));
         GetApi getApi = new GetApi(cm.getListArea(), getActivity(), new OnEventListener() {
             @Override
             public void onSuccess(JSONArray object) {
@@ -242,7 +243,11 @@ public class FragmentHome extends Fragment implements SwipeRefreshLayout.OnRefre
                         }
                         listPost.clear();
                         listPost = new ArrayList<>();
-                        GetApi api_area = new GetApi(cm.getUrlListPostsArea(listArea.get(position).getId(), price), getActivity(), new OnEventListener() {
+                        String link = cm.getUrlListPostsArea(listArea.get(position).getId(), price);
+                        if (listArea.get(position).getId() == 100) {
+                            link = cm.getUrlListPostsArea(listArea.get(position).getId(), price) + "?gps=" + cm.getArea(getActivity(), "latitude")+","+cm.getArea(getActivity(), "longitude");
+                        }
+                        GetApi api_area = new GetApi(link, getActivity(), new OnEventListener() {
                             @Override
                             public void onSuccess(JSONArray object) {
                                 for (int i = 0; i < object.length(); i++) {

@@ -2,7 +2,10 @@ package com.datvl.trotot.common;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
@@ -10,6 +13,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.datvl.trotot.MainActivity;
 import com.datvl.trotot.R;
 
 public class Common {
@@ -167,6 +171,15 @@ public class Common {
         return user_id;
     }
 
+    public static String getArea(Context context, String type) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("area", Context.MODE_PRIVATE);
+        String rs = "0";
+//        if ( (Boolean) sharedPreferences.getBoolean("is_login", false) ){
+            rs = sharedPreferences.getString(type, "0");
+//        }
+        return rs;
+    }
+
     public void setNoification( Context context, int notificationId, String ChannelId, String title, String content) {
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, "Your_channel_id")
@@ -176,6 +189,52 @@ public class Common {
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         String channelId = "Your_channel_id";
+
+        Intent notifyIntent = new Intent(context, MainActivity.class);
+        notifyIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent notifyPendingIntent = PendingIntent.getActivity(
+                context, 0, notifyIntent, PendingIntent.FLAG_UPDATE_CURRENT
+        );
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, channelId);
+        builder.setContentIntent(notifyPendingIntent);
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationManager ntcManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+            NotificationChannel mChannel = new NotificationChannel(
+                    channelId, content, NotificationManager.IMPORTANCE_HIGH);
+            ntcManager.createNotificationChannel(mChannel);
+        }
+
         notificationManager.notify(notificationId, mBuilder.build());
     }
+
+//    public void showNotification(Context context, String title, String body, Intent intent) {
+//        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+//
+//        int notificationId = 1;
+//        String channelId = "mess-01";
+//        String channelName = "Mess Name";
+//        int importance = NotificationManager.IMPORTANCE_HIGH;
+//
+//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+//            NotificationChannel mChannel = new NotificationChannel(
+//                    channelId, channelName, importance);
+//            notificationManager.createNotificationChannel(mChannel);
+//        }
+//
+//        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(context, channelId)
+//                .setSmallIcon(R.drawable.heart)
+//                .setContentTitle(title)
+//                .setContentText(body);
+//
+//        TaskStackBuilder stackBuilder = TaskStackBuilder.create(context);
+//        stackBuilder.addNextIntent(intent);
+//        PendingIntent resultPendingIntent = stackBuilder.getPendingIntent(
+//                0,
+//                PendingIntent.FLAG_UPDATE_CURRENT
+//        );
+//        mBuilder.setContentIntent(resultPendingIntent);
+//
+//        notificationManager.notify(notificationId, mBuilder.build());
+//    }
 }

@@ -3,10 +3,12 @@ package com.datvl.trotot;
 import android.annotation.SuppressLint;
 import android.app.FragmentManager;
 import android.app.Notification;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
 
     private TextView mTextMessage;
     List<Post> listPost;
-    Common cm;
+    Common cm = new Common();
     public String url = cm.getUrlListPosts();
     ProgressBar pb;
     GetApi getApi;
@@ -193,7 +195,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener{
 
     @Override
     public void onLocationChanged(Location location) {
-        Log.d("dat", "onLocationChanged: " + "Latitude:" + location.getLatitude() + ", Longitude:" + location.getLongitude());
+//        Log.d("dat", "onLocationChanged: " + "Latitude:" + (location.getLatitude()*100) + ", Longitude:" + (location.getLongitude()*100));
+        final SharedPreferences sharedPreferences = getSharedPreferences("area", Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("latitude", "" + (int)(location.getLatitude()*100));
+        editor.putString("longitude", "" + (int)(location.getLongitude()*100));
+        editor.commit();
+        Log.d("dat", "onLocationChanged: " + cm.getArea(getApplication(), "latitude"));
     }
 
     @Override
